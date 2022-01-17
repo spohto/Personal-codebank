@@ -1,0 +1,52 @@
+*** Settings ***
+Documentation     An example about for loops.
+Library           RPA.Tables
+
+*** Variables ***
+
+*** Tasks ***
+Practice For Loops
+    Loop Over A List
+
+*** Keywords ***
+Loop Over A List
+    ${stuff}    Read Table From Csv    filename.csv
+    FOR    ${r}    IN    @{stuff}
+        Read the File For One Item    ${r}
+    END
+
+Read the File For One Item
+    [Arguments]    ${i}
+    Log To Console    ${i}[Column1]
+    Log To Console    ${i}[Column2]
+    Log To Console    ${i}[Column3]
+    Log To Console    ${i}[Column4]
+    Log To Console    ${i}[Column5]
+    
+------------------------------------------
+
+*** Settings ***
+Documentation       An example about for loops.
+Library             RPA.Tables
+
+*** Variables ***
+
+*** Tasks ***
+Read stuff from CSV
+    ${stuff}    Get Stuff
+        FOR    ${row}    IN    @{stuff}
+            Read the File Row by Row     ${row}
+        END
+
+*** Keywords ***
+Get Stuff
+    ${something}    Read Table From Csv    ${CURDIR}${/}filename.csv
+    [Return]    ${something}
+
+Read the File Row by Row 
+    [Arguments]    ${i}
+    Log To Console    ${i}[Column1]
+    Log To Console    ${i}[Column2]
+    Log To Console    ${i}[Column3]
+    Log To Console    ${i}[Column4]
+    Log To Console    ${i}[Column5]
